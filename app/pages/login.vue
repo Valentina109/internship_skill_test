@@ -19,7 +19,9 @@
                 </div>
                 <a href="#" class="font-medium text-primary hover:text-primary-emphasis transition-all">Forgot your password?</a>
             </div>
-            <Button label="Sign In" class="w-full" />
+            <Button label="Sign In" class="w-full" @click ="handleLogin"/>
+            <p v-if="errorMessage" class="text-red-500">{{ errorMessage }}</p>
+
         </div>
     </div>
 </template>
@@ -33,4 +35,27 @@ const password = ref('');
 const remember = ref(false);
 
 //TODO: add login logic
-</script>
+const errorMessage = ref('');
+const supabase = useSupabaseClient();
+
+const handleLogin = async () => {
+  errorMessage.value = '';
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email: email.value,
+    password: password.value
+  });
+
+  if (error) {
+    errorMessage.value = error.message;
+  } else {
+    navigateTo('/');
+  }
+};
+const user = useSupabaseUser();
+watchEffect(() => {
+  if (user.value) {
+    navigateTo('/');
+  }
+});
+    </script>

@@ -43,6 +43,17 @@
                             </button>
                         </li>
                     </template>
+                    //logout button
+                    <li v-if="user">
+                        <button
+                            @click="logout"
+                            class="z-30 text-left w-full relative flex items-center gap-2 pl-3 pr-2 py-2 rounded-lg cursor-pointer transition-all border border-transparent hover:border-surface-200 dark:hover:border-surface-800 hover:bg-surface-0 dark:hover:bg-surface-950 text-surface-600 dark:text-surface-400"
+                        >
+                            <i class="pi pi-sign-out !text-xl !leading-none" />
+                            <span class="flex-1 font-medium">Sign Out</span>
+                        </button>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -95,4 +106,9 @@ const navs = ref([
         label: 'Dashboard'
     },
 ]);
+const supabase = useSupabaseClient();
+const logout = async () => {
+  await supabase.auth.signOut();
+  await navigateTo('/login');
+};
 </script>
