@@ -73,3 +73,25 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+# Task Management Application
+
+A full-featured task management application built with Nuxt 3, Supabase, and Pinia, featuring authentication, CRUD operations, and dark/light mode toggle.
+## Features Implemented
+Authentication & User Management
+Task Management
+User Interface
+State Management
+Key Libraries
+`@supabase/supabase-js` 
+`date-fns`
+`@pinia/nuxt`
+## Challenges & Solutions
+Challenge:
+Initially struggled with whether to combine task list and detail views in index.vue or separate them across multiple components while keeping user profile distinct.
+
+Solution:
+Implemented a clear three-view separation:
+
+index.vue - Dedicated to task listing with filtering/sorting
+tasks.vue - Handles single task display and editing
+profile.vue - Pure user management 
